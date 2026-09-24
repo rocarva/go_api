@@ -100,11 +100,15 @@ Base URL: `http://localhost:8000`
 | Method | Route                    | Description             |
 | ------ | ------------------------ | ----------------------- |
 | GET    | `/`                      | Home page               |
+| GET    | `/api/health`            | Health check            |
 | GET    | `/api/personalidades`    | List all personalities  |
 | GET    | `/api/personalidades/{id}` | Get a single personality |
 | POST   | `/api/personalidades`    | Create a personality    |
 | PUT    | `/api/personalidades/{id}` | Update a personality  |
 | DELETE | `/api/personalidades/{id}` | Delete a personality  |
+
+The list endpoint supports pagination via `?page=` and `?limit=`. Create/update
+validate that `nome` is not empty. See [`docs/api.md`](docs/api.md) for details.
 
 > Detailed examples (requests, responses, status codes) are available in [`docs/api.md`](docs/api.md).
 
