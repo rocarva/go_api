@@ -100,11 +100,15 @@ URL base: `http://localhost:8000`
 | Método | Rota                      | Descrição                |
 | ------ | ------------------------- | ------------------------ |
 | GET    | `/`                       | Página inicial           |
+| GET    | `/api/health`             | Health check             |
 | GET    | `/api/personalidades`     | Lista todas as personalidades |
 | GET    | `/api/personalidades/{id}` | Retorna uma personalidade |
 | POST   | `/api/personalidades`     | Cria uma personalidade   |
 | PUT    | `/api/personalidades/{id}` | Atualiza uma personalidade |
 | DELETE | `/api/personalidades/{id}` | Deleta uma personalidade |
+
+O endpoint de listagem suporta paginação via `?page=` e `?limit=`. A criação e
+atualização validam que `nome` não seja vazio. Veja [`docs/api.md`](docs/api.md).
 
 > Exemplos detalhados (requisições, respostas, códigos de status) em [`docs/api.md`](docs/api.md).
 

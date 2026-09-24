@@ -35,9 +35,29 @@ HTTP/1.1 200 OK
 Home Page
 ```
 
+### `GET /api/health`
+
+Health check endpoint.
+
+**Response** — `200 OK`:
+
+```json
+{ "status": "ok" }
+```
+
 ### `GET /api/personalidades`
 
 Lists all personalities.
+
+**Query parameters** (both optional; pagination is enabled when either is present):
+
+| Param   | Type    | Default | Description              |
+| ------- | ------- | ------- | ------------------------ |
+| `page`  | integer | `1`     | Page number (1-based)    |
+| `limit` | integer | `10`    | Records per page         |
+
+When paginating, the response includes the `X-Total-Count` header with the
+total number of records.
 
 **Response** — `200 OK`:
 
@@ -46,6 +66,12 @@ Lists all personalities.
   { "id": 1, "nome": "...", "historia": "..." },
   { "id": 2, "nome": "...", "historia": "..." }
 ]
+```
+
+**Example (paginated):**
+
+```bash
+curl "http://localhost:8000/api/personalidades?page=1&limit=10"
 ```
 
 ### `GET /api/personalidades/{id}`
@@ -75,14 +101,16 @@ Creates a new personality.
 { "nome": "Novo Nome", "historia": "Nova história" }
 ```
 
+The `nome` field is required (non-empty).
+
 **Response** — `201 Created` (the created record, including its `id`).
 
 **Errors:**
 
-| Status | When                |
-| ------ | ------------------- |
-| `400`  | Invalid JSON body   |
-| `500`  | Database error      |
+| Status | When                             |
+| ------ | -------------------------------- |
+| `400`  | Invalid JSON body or empty `nome`|
+| `500`  | Database error                   |
 
 **Example:**
 
@@ -102,15 +130,17 @@ Updates an existing personality.
 { "nome": "Nome Atualizado", "historia": "História atualizada" }
 ```
 
+The `nome` field, when provided, cannot be empty.
+
 **Response** — `200 OK` (the updated record).
 
 **Errors:**
 
-| Status | When                |
-| ------ | ------------------- |
-| `400`  | Invalid JSON body   |
-| `404`  | ID not found        |
-| `500`  | Database error      |
+| Status | When                             |
+| ------ | -------------------------------- |
+| `400`  | Invalid JSON body or empty `nome`|
+| `404`  | ID not found                     |
+| `500`  | Database error                   |
 
 **Example:**
 
