@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../components/Personalidades.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 export default class Personalidades extends Component {
     state = {
         personalidades: []
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/personalidades')
+        axios.get(`${API_URL}/api/personalidades`)
             .then(res => {
                 const personalidades = res.data;
                 this.setState({ personalidades })

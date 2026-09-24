@@ -1,0 +1,25 @@
+# Binários
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+personalidades
+personalidades.exe
+
+# Variáveis de ambiente / segredos
+.env
+.env.local
+
+# Cobertura de testes
+coverage.out
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
